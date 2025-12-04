@@ -22,3 +22,11 @@ The following are the commands to run the fronend to get the app in emulator or 
 npm start
 npx react-native run-android
 ```
+## Android Application
+This project aims at building an adnroid app.
+In order to make communication possible between the react-native components and the cpp server, NDK which is part of SDK is used. 
+Moreover, this project requires the following need to be downloaded before running the project:
+> - Platform Tools
+> - Android Studio( automatically includes Platform Tools, sdk)
+> - java
+> - ndk
