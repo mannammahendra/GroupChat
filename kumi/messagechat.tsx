@@ -5,6 +5,8 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, FlatList, TouchableOpacity } from 'react-native';
 
+
+
 export class MessageChat extends Component {
   constructor(props) {
     super(props);
@@ -41,6 +43,13 @@ export class MessageChat extends Component {
     return (
       <View className="flex-1 bg-gray-100 p-4">
         <Text className="text-2xl font-bold mb-4">{group.name}</Text>
+
+        <View style={item.sender === "me" ? Theme.chatBubble.me : Theme.chatBubble.other}>
+  <Text style={{ color: item.sender === 'me' ? "#FFF" : Theme.colors.text }}>
+    {item.text}
+  </Text>
+</View>
+
 
         <FlatList
           data={messages}

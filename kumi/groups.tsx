@@ -1,6 +1,7 @@
 // File: Groups.js (Class Component)
 import React, { Component } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { Theme } from "./theme";
 
 const groups = [
   { id: '1', name: 'Family', lastMessage: 'How are you?' },
@@ -13,6 +14,13 @@ export default class Groups extends Component {
     const { navigation } = this.props;
 
     return (
+
+
+<View style={[Theme.container, { backgroundColor: Theme.colors.background }]}>
+  <Text style={[Theme.text.title, { color: Theme.colors.text }]}>
+
+
+
       <View className="flex-1 bg-gray-100 p-4">
         <Text className="text-2xl font-bold mb-4">Your Groups</Text>
         <FlatList
@@ -29,6 +37,8 @@ export default class Groups extends Component {
           )}
         />
       </View>
+        </Text>
+</View>
     );
   }
 }
