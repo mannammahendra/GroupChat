@@ -1,8 +1,16 @@
-#include "crow.h"
-//#include <crow/app.h>
+#include <jsi/jsi.h>
 #include <thread>
+#include "crow.h"
 
-extern "C" void startServer() {
+using namespace facebook;
+
+// A simple C++ function that will be callable from JavaScript
+double multiply(double a, double b) {
+    return a * b;
+}
+
+// Your existing startServer function
+void startServer() {
     std::thread([](){
         crow::SimpleApp app;
 
@@ -14,11 +22,33 @@ extern "C" void startServer() {
     }).detach();
 }
 
-int main() {
-    startServer();
-    // Keep the main thread alive
-    // while (true) {
-    //     std::this_thread::sleep_for(std::chrono::seconds(1));
-    // }
-    // return 0;
+// The JSI install function, which is called by React Native to register your native module
+extern "C" __attribute__((visibility("default"))) void install(jsi::Runtime& rt) {
+    // Expose the multiply function
+    auto multiply_func = jsi::Function::createFromHostFunction(
+        rt,
+        jsi::PropNameID::forAscii(rt, "multiply"),
+        2, // number of arguments
+        [](jsi::Runtime& rt, const jsi::Value& this_val, const jsi::Value* args, size_t count) -> jsi::Value {
+            if (count != 2) {
+                jsi::detail::throwJSError(rt, "Expected 2 arguments");
+            }
+            double a = args[0].asNumber();
+            double b = args[1].asNumber();
+            return jsi::Value(multiply(a, b));
+        }
+    );
+    rt.global().setProperty(rt, "multiply", std::move(multiply_func));
+
+    // Expose the startServer function
+    auto start_server_func = jsi::Function::createFromHostFunction(
+        rt,
+        jsi::PropNameID::forAscii(rt, "startServer"),
+        0, // number of arguments
+        [](jsi::Runtime& rt, const jsi::Value& this_val, const jsi::Value* args, size_t count) -> jsi::Value {
+            startServer();
+            return jsi::Value::undefined();
+        }
+    );
+    rt.global().setProperty(rt, "startServer", std::move(start_server_func));
 }

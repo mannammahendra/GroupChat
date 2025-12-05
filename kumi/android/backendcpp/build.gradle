@@ -1,0 +1,33 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.facebook.react'
+
+android {
+    namespace "com.kumi.backendcpp"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    ndkVersion rootProject.ext.ndkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+    
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+}
+
+react {
+    root = file("../../")
+}
+
+dependencies {
+    implementation 'com.facebook.react:react-android'
+}

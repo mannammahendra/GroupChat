@@ -79,6 +79,10 @@
 // export default App;
 
 
+import { Platform } from "react-native";
+console.log("Platform:", Platform);
+
+
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView, Text } from 'react-native';
 import { NativeModules } from 'react-native';
