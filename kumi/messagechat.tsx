@@ -1,62 +1,77 @@
 
-// -----------------------------------------------
-// File: MessageChat.js
+// -----------------------------------------------------------
+// File: MessageChat.js (Class Component)
 
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import { View, Text, TextInput, FlatList, TouchableOpacity } from 'react-native';
 
-export function MessageChat({ route }) {
-  const { group } = route.params;
+export class MessageChat extends Component {
+  constructor(props) {
+    super(props);
 
-  const [messages, setMessages] = useState([
-    { id: '1', text: 'Welcome to the chat!', sender: 'system' },
-    { id: '2', text: 'Hello everyone!', sender: 'user' },
-  ]);
+    this.state = {
+      messages: [
+        { id: '1', text: 'Welcome to the chat!', sender: 'system' },
+        { id: '2', text: 'Hello everyone!', sender: 'user' },
+      ],
+      input: '',
+    };
+  }
 
-  const [input, setInput] = useState('');
-
-  const sendMessage = () => {
+  sendMessage = () => {
+    const { input, messages } = this.state;
     if (input.trim() === '') return;
 
-    setMessages([...messages, { id: Date.now().toString(), text: input, sender: 'me' }]);
-    setInput('');
+    const newMessage = {
+      id: Date.now().toString(),
+      text: input,
+      sender: 'me',
+    };
+
+    this.setState({
+      messages: [...messages, newMessage],
+      input: '',
+    });
   };
 
-  return (
-    <View className="flex-1 bg-gray-100 p-4">
-      <Text className="text-2xl font-bold mb-4">{group.name}</Text>
+  render() {
+    const { group } = this.props.route.params;
+    const { messages, input } = this.state;
 
-      <FlatList
-        data={messages}
-        keyExtractor={(item) => item.id}
-        className="flex-1 mb-4"
-        renderItem={({ item }) => (
-          <View
-            className={`p-3 my-1 rounded-2xl max-w-[80%] shadow ${
-              item.sender === 'me' ? 'bg-blue-500 self-end' : 'bg-white'
-            }`}
-          >
-            <Text className={item.sender === 'me' ? 'text-white' : 'text-black'}>
-              {item.text}
-            </Text>
-          </View>
-        )}
-      />
+    return (
+      <View className="flex-1 bg-gray-100 p-4">
+        <Text className="text-2xl font-bold mb-4">{group.name}</Text>
 
-      <View className="flex-row items-center">
-        <TextInput
-          className="flex-1 bg-white p-3 rounded-xl shadow"
-          placeholder="Type a message"
-          value={input}
-          onChangeText={setInput}
+        <FlatList
+          data={messages}
+          keyExtractor={(item) => item.id}
+          className="flex-1 mb-4"
+          renderItem={({ item }) => (
+            <View
+              className={`p-3 my-1 rounded-2xl max-w-[80%] shadow ${
+                item.sender === 'me' ? 'bg-blue-500 self-end' : 'bg-white'
+              }`}
+            >
+              <Text className={item.sender === 'me' ? 'text-white' : 'text-black'}>{item.text}</Text>
+            </View>
+          )}
         />
-        <TouchableOpacity
-          className="bg-blue-500 p-3 ml-2 rounded-xl"
-          onPress={sendMessage}
-        >
-          <Text className="text-white font-bold">Send</Text>
-        </TouchableOpacity>
+
+        <View className="flex-row items-center">
+          <TextInput
+            className="flex-1 bg-white p-3 rounded-xl shadow"
+            placeholder="Type a message"
+            value={input}
+            onChangeText={(text) => this.setState({ input: text })}
+          />
+          <TouchableOpacity
+            className="bg-blue-500 p-3 ml-2 rounded-xl"
+            onPress={this.sendMessage}
+          >
+            <Text className="text-white font-bold">Send</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
-  );
+    );
+  }
 }
