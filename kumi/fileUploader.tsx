@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import * as DocumentPicker from 'react-native-document-picker';
 import { launchImageLibrary } from 'react-native-image-picker';
-import { Theme } from './Theme';
+import { Theme } from './theme';
 
 export default class FileUploader extends Component {
   constructor(props) {

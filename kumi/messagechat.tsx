@@ -4,12 +4,16 @@
 
 import React, { Component } from 'react';
 import { View, Text, TextInput, FlatList, TouchableOpacity } from 'react-native';
+import { Theme } from './theme';
+import AutoReplySystem from './autoReply';
 
 
 
 export class MessageChat extends Component {
   constructor(props) {
     super(props);
+
+    this.autoReplySystem = new AutoReplySystem();
 
     this.state = {
       messages: [
