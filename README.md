@@ -30,3 +30,5 @@ Moreover, this project requires the following need to be downloaded before runni
 > - Android Studio( automatically includes Platform Tools, sdk)
 > - java
 > - ndk
+
+** Deployed hello world application **
