@@ -19,6 +19,7 @@ This application uses react-native for fronend and develops the application as a
 
 The following are the commands to run the fronend to get the app in emulator or andoid device:
 ```bash
+npx @react-native-community/cli init kumi
 npm start
 npx react-native run-android
 ```
