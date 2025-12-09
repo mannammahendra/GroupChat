@@ -1,45 +1,48 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React from 'react';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
-
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
+export default function App() {
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
-  );
-}
+    <View style={{
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 25,
+      backgroundColor: '#f5f7fa'
+    }}>
 
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
+      <Image
+        source={{ uri: "https://reactnative.dev/img/logo-og.png" }}
+        style={{ width: 180, height: 180, borderRadius: 20, marginBottom: 20 }}
       />
+
+      <Text style={{ fontSize: 26, fontWeight: '700', marginBottom: 10 }}>
+        Welcome to ChatX
+      </Text>
+
+      <Text style={{
+        fontSize: 16,
+        color: '#555',
+        textAlign: 'center',
+        marginBottom: 40
+      }}>
+        A simple & beautiful React Native demo UI.
+      </Text>
+
+      <TouchableOpacity
+        onPress={() => console.log("Start Messaging pressed")}
+        style={{
+          backgroundColor: '#4e8df5',
+          paddingVertical: 14,
+          paddingHorizontal: 35,
+          borderRadius: 12,
+          elevation: 3
+        }}
+      >
+        <Text style={{ fontSize: 18, color: 'white', fontWeight: '600' }}>
+          Start Messaging
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
-
-export default App;
