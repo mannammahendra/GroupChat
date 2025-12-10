@@ -1,48 +1,80 @@
-import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import React, { Component } from 'react';
+import { SafeAreaView, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
-  return (
-    <View style={{
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 25,
-      backgroundColor: '#f5f7fa'
-    }}>
+// Screens
+import Groups from './groups';
+import { MessageChat } from './messagechat';
+import ChatMediaView from './mediaview';
+import FileUploader from './fileUploader';
 
-      <Image
-        source={{ uri: "https://reactnative.dev/img/logo-og.png" }}
-        style={{ width: 180, height: 180, borderRadius: 20, marginBottom: 20 }}
-      />
+// Your server IP
+const SERVER_URL = "http://192.168.1.10:18080/";   // ← change to your backend IP
 
-      <Text style={{ fontSize: 26, fontWeight: '700', marginBottom: 10 }}>
-        Welcome to ChatX
-      </Text>
+const Stack = createStackNavigator();
 
-      <Text style={{
-        fontSize: 16,
-        color: '#555',
-        textAlign: 'center',
-        marginBottom: 40
-      }}>
-        A simple & beautiful React Native demo UI.
-      </Text>
+class App extends Component {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      serverStatus: "Connecting…"   // default UI if server doesn’t respond
+    };
+  }
 
-      <TouchableOpacity
-        onPress={() => console.log("Start Messaging pressed")}
-        style={{
-          backgroundColor: '#4e8df5',
-          paddingVertical: 14,
-          paddingHorizontal: 35,
-          borderRadius: 12,
-          elevation: 3
-        }}
-      >
-        <Text style={{ fontSize: 18, color: 'white', fontWeight: '600' }}>
-          Start Messaging
-        </Text>
-      </TouchableOpacity>
-    </View>
-  );
+  componentDidMount() {
+    // Try connecting to backend
+    fetch(SERVER_URL)
+      .then(res => res.text())
+      .then(text => this.setState({ serverStatus: text }))
+      .catch(() => this.setState({ serverStatus: "Server Offline" })); // fallback UI
+  }
+
+  render() {
+    const { serverStatus } = this.state as { serverStatus: string };
+
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          {/* Home / Groups */}
+          <Stack.Screen
+            name="Groups"
+            component={Groups}
+            options={{
+              headerTitle: serverStatus, // Shows server message OR fallback
+            }}
+          />
+
+          {/* Chat Screen */}
+          <Stack.Screen
+            name="MessageChat"
+            component={MessageChat}
+            options={({ route }: any) => ({
+              title: route?.params?.group?.name ?? "Chat",
+            })}
+          />
+
+          {/* Media View Screen */}
+          <Stack.Screen
+            name="ChatMediaView"
+            component={ChatMediaView}
+            options={({ route }: any) => ({
+              title: route?.params?.groupName ?? "Media",
+            })}
+          />
+
+          {/* File Uploader Screen */}
+          <Stack.Screen
+            name="FileUploader"
+            component={FileUploader}
+            options={{
+              title: "Upload Files",
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
 }
+
+export default App;
