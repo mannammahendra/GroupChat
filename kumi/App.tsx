@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { SafeAreaView, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -7,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Groups from './groups';
 import { MessageChat } from './messagechat';
 import ChatMediaView from './mediaview';
-import FileUploader from './fileUploader';
+import FileUploader from './fileUploader.tsx';
 
 // Your server IP
 const SERVER_URL = "http://192.168.1.10:18080/";   // ← change to your backend IP

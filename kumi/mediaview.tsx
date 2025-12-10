@@ -26,11 +26,11 @@ export default class ChatMediaView extends Component<Props> {
   };
 
   handleImagePress = (image: any) => {
-    alert('Image Content: ' + image.name);
+    console.log('Image Content: ' + image.name);
   };
 
   handleFilePress = (file: any) => {
-    alert('File Content: ' + file.name);
+    console.log('File Content: ' + file.name);
   };
 
   renderImages() {
@@ -126,7 +126,8 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   header: {
-    ...Theme.text.title,
+    fontSize: 24,
+    fontWeight: 'bold' as const,
     color: Theme.colors.text,
     textAlign: 'center',
     marginBottom: 24,
@@ -143,7 +144,7 @@ const styles = StyleSheet.create({
     color: Theme.colors.text,
   },
   tabTextActive: {
-    fontWeight: 'bold' as 'bold',
+    fontWeight: '700',
     color: Theme.colors.primary,
   },
   content: {

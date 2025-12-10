@@ -40,7 +40,7 @@ export const Theme = {
   text: {
     title: {
       fontSize: 24,
-      fontWeight: "bold",
+      fontWeight: "bold" as const,
     },
     subtitle: {
       fontSize: 16,
@@ -66,22 +66,22 @@ export const Theme = {
         colorScheme === "dark"
           ? DarkColors.bubbleMe
           : LightColors.bubbleMe,
-      alignSelf: "flex-end",
+      alignSelf: "flex-end" as const,
       padding: 12,
       borderRadius: 20,
       marginVertical: 6,
-      maxWidth: "80%",
+      maxWidth: "80%" as const,
     },
     other: {
       backgroundColor:
         colorScheme === "dark"
           ? DarkColors.bubbleOther
           : LightColors.bubbleOther,
-      alignSelf: "flex-start",
+      alignSelf: "flex-start" as const,
       padding: 12,
       borderRadius: 20,
       marginVertical: 6,
-      maxWidth: "80%",
+      maxWidth: "80%" as const,
     },
   },
 

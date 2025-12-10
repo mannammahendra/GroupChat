@@ -45,6 +45,10 @@ export default class Groups extends Component<Props> {
 }
 
 const styles = StyleSheet.create({
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold' as const,
+  },
   groupItem: {
     backgroundColor: Theme.colors.card,
     padding: 16,
