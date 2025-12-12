@@ -4,8 +4,8 @@
 
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import * as DocumentPicker from 'react-native-document-picker';
-import { launchImageLibrary } from 'react-native-image-picker';
+import * as DocumentPicker from '@react-native-documents/picker';
+import { launchImageLibrary } from '@react-native-image/picker';
 import { Theme } from './theme';
 
 interface SelectedFile {
@@ -48,7 +48,7 @@ export default class FileUploader extends Component<{}, State> {
 
   pickFile = async () => {
     try {
-      const res = await DocumentPicker.pickSingle({});
+      const [res] = await DocumentPicker.pick({});
       this.setState({ selectedFile: res as SelectedFile });
     } catch (err) {
       if (!DocumentPicker.isCancel(err)) {
