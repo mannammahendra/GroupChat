@@ -58,6 +58,11 @@ npm run ios
 yarn ios
 ```
 
+### Features of the application
+- ListView for loading the chats efficiently
+- ScrollView pageEnabled to enable smooth translations for gestures
+- useState to store relevant information and update the components  based on the data.
+
 If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
 
 This is one way to run your app — you can also build it directly from Android Studio or Xcode.
