@@ -23,6 +23,7 @@ npx @react-native-community/cli init kumi
 npm start
 npx react-native run-android
 ```
+Make sure all the versions of the packages and gradle are compatible and available
 ## Android Application
 This project aims at building an adnroid app.
 In order to make communication possible between the react-native components and the cpp server, NDK which is part of SDK is used. 
@@ -33,3 +34,5 @@ Moreover, this project requires the following need to be downloaded before runni
 > - ndk
 
 ** Deployed hello world application **
+
+Created an application that can hanele chats from friends, famiy and work and help you with the easy managemenet of these chats.
