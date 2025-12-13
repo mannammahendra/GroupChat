@@ -4,9 +4,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 // Screens
 import Groups from './groups';
-//import { MessageChat } from './messagechat';
-//import ChatMediaView from './mediaview';
-//import FileUploader from './fileUploader.tsx';
+import { MessageChat } from './messagechat';
+import ChatMediaView from './mediaview';
+import FileUploader from './fileUploader.tsx';
 
 // Your server IP
 //const SERVER_URL = "http://192.168.1.10:18080/";   // ← change to your backend IP//
@@ -39,39 +39,39 @@ class App extends Component {
           <Stack.Screen
             name="Groups"
             component={Groups}
-            options={{
-              headerTitle: serverStatus, // Shows server message OR fallback
-            }}
+            // options={{
+            //   headerTitle: serverStatus, // Shows server message OR fallback
+            // }}
           />
 
           {/*Chat Screen*/}
-          {/*
+          
           <Stack.Screen
             name="MessageChat"
             component={MessageChat}
             options={({ route }: any) => ({
               title: route?.params?.group?.name ?? "Chat",
             })}
-          /> */}
+          /> 
 
           {/* Media View Screen */}
-          {/*
+          
           <Stack.Screen
             name="ChatMediaView"
             component={ChatMediaView}
             options={({ route }: any) => ({
               title: route?.params?.groupName ?? "Media",
             })}
-          /> */}
+          /> 
           {/* File Uploader Screen */}
-          {/*
+          
           <Stack.Screen
             name="FileUploader"
             component={FileUploader}
             options={{
               title: "Upload Files",
             }}
-          />*/}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     );
